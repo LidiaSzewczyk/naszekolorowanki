@@ -1,0 +1,45 @@
+.logo {
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+           }
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+       }
+
+.main-header {
+    width: 100%;
+}
+
+.main-footer {
+    align-self: flex-end;
+    clear: both;
+}
+
+.custom-btn {
+    float: right;
+}
+
+.custom-form {
+    padding-bottom: 55px;
+}
+
+.img-aside {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 30px;
+       }
+
+.page-name {
+margin-top: 20px;
+}
+
+.coloring-book {
+    border-radius: 3px;
+}
