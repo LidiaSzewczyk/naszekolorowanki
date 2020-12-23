@@ -25,7 +25,9 @@
                     </li>
                     {% if current_user.is_authenticated %}
                        <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('image.list', username=current_user.username) }} ">Prace do akceptacji</a>
+                        <a class="nav-link" href="{{ url_for('image.list_to_accept', username=current_user.username) }} ">Prace do akceptacji</a>
+                    </li> <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('image.list_accepted', username=current_user.username) }} ">Prace zaakceptowane</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.user', username=current_user.username) }} ">Twoje konto</a>

@@ -1,7 +1,8 @@
 {% extends '_base.html' %}
+{% from "_form_macros.html" import render_field  %}
 
 {% block content %}
-<h3 class="p-3">lista zdjęć do akceptacji</h3>
+<h3 class="p-3">{{ title }}</h3>
 
 
 <div class="row my-2 card-wrapper">
@@ -18,12 +19,9 @@
                 {{image.description }}<br>
                 Autor: {{image.username}}
             </figcaption>
-            <a class="btn btn-outline-primary" href="{{ url_for('image.edit_image', image_id=image.id)}}">Zmień
-                status</a>
-            <a class="btn btn-outline-danger" href="{{ url_for('image.delete_image', image_id=image.id)}}">Usuń
-                obrazek</a>
 
-
+            <a class="btn btn-outline-primary float-right"
+               href="{{ url_for('image.edit_image', image_id=image.id, fn_name=fn_name, title=title)}}">Edytuj</a>
         </figure>
     </div>
 

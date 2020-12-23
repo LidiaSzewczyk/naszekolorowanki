@@ -2,6 +2,7 @@
 {% from "_form_macros.html" import render_field  %}
 
 {% block content %}
+<h3> Edycja - {{ title }}</h3>
 <div class="col-lg-4 col-md-6 mb-4">
     <figure class="figure">
 
@@ -10,13 +11,19 @@
              src="{{ url_for('main.uploads', filename=image.image) }}">
         <figcaption class="figure-caption">
             {{image.description }}<br>
-            Autor: {{image.username}}
+            Autor: {{image.username}}<br>
+            Wielkość: {{ img_size }} MB <br>
+            Utworzone: {{ img_created  }}
         </figcaption>
     </figure>
 </div>
 
 <div class="col-6">
     {% include '_form.html' %}
+    <a class="btn btn-outline-danger float-right" href="{{ url_for('image.delete_image', image_id=image.id, fn_name=fn_name)}}">Usuń
+                obrazek</a>
 </div>
+
+
 
 {% endblock %}
