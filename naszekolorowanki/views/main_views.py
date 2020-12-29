@@ -2,6 +2,7 @@ import base64
 
 from flask import Blueprint, render_template, flash, redirect, url_for, send_from_directory
 from flask_wtf.file import FileRequired
+from sqlalchemy import desc
 
 from naszekolorowanki import login_manager, db
 from naszekolorowanki.forms.image_forms import ImageForm
@@ -20,7 +21,7 @@ bp_main = Blueprint('main', __name__, url_prefix='/')
 
 @bp_main.route('/', methods=['GET'])
 def home():
-    images = Image.query.filter_by(status=True).all()
+    images = Image.query.filter_by(status=True).order_by(desc(Image.date)).all()
     return render_template('home.html', images=images)
 
 

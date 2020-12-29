@@ -25,6 +25,7 @@ def login():
 
 
 @bp_auth.route('/signup', methods=['GET', 'POST'])
+@login_required
 def signup():
     form = SignUpForm()
 

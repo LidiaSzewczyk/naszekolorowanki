@@ -1,29 +1,49 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<h2 class="p-3">Cześć!</h2>
+<h3 class="p-3">Cześć!</h3>
 
 <p><span>Widzimy, że odwiedziłeś naszą stronę. Istnieje ona po to, by dzielić się pomysłami na kolorowanki i rysunki. Może ktoś naprawdę się zainspiruje i zostanie wielkim artystą? Miło by było... :) Same bardzo lubimy kolorować, ale czasem miewamy braki weny. Przeglądaj do woli prace innych, a możesz też wstawić własne dzieła.</span>
 </p>
 <div class="row my-2 card-wrapper">
+    {% set count = namespace(value=0) %}
     {% if images %}
+
     {% for image in images %}
+    {% with home_image = url_for('main.uploads', filename=image.image) %}
+    {% set count.value = count.value + 1 %}
+
 
     <div class="col-lg-4 col-md-6 mb-4">
         <figure class="figure">
 
-
-            <img class="rounded img-fluid figure-img" alt="Responsive image"
-                 src="{{ url_for('main.uploads', filename=image.image) }}">
-            <figcaption class="figure-caption">
+            <a>
+                <img id="myImg" class="rounded img-fluid figure-img z-depth-1 home-page-image" alt="Responsive image"
+                     src="{{home_image}}" data-toggle="modal"
+                     data-target="#modal{{count.value }}">
+            </a>
+            <figcaption class="figure-caption font-our">
                 {{image.description }}<br>
-                 Autor: {{image.username}}
+                Autor: {{image.username}}
             </figcaption>
         </figure>
+
+        {% include '_modal_image.html' %}
+
+
     </div>
 
+
+    {% endwith %}
     {% endfor %}
     {% endif %}
 </div>
 {% endblock %}
 
+{% block scripts %}
+{{ super() }}</div>
+<script>
+
+</script>
+
+{% endblock %}
