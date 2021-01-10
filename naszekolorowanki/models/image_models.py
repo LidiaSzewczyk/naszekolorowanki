@@ -11,6 +11,7 @@ class Image(db.Model):
     username = db.Column(db.String(80),  nullable=False)
     image = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(300))
+    info = db.Column(db.String(300))
     date = db.Column(db.DateTime, default=datetime.utcnow)
     status = db.Column(db.Boolean, default=False)
 

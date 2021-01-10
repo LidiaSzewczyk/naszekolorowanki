@@ -1,17 +1,18 @@
-<div class="modal modal-cookie"  id="modalCookie">
-  <div class="modal-dialog">
+<div class="modal modal-cookie "  id="modalCookie">
+  <div class="modal-dialog modal-xl mb-0 mw-100 mh-15 fixed-bottom">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
 
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
+      <div class="modal-body  cookie-our  pb-0">
+         <div class="row pl-3">
+           <div class="col-9 ">
+        <p><span>Ta strona korzysta z ciasteczek, aby świadczyć usługi na najwyższym poziomie.
+        Warunki przechowywania lub dostępu do plików cookies można zmienić w ustawieniach przeglądarki - niedokonanie zmian ustawień przeglądarki jest jednoznaczne z wyrażeniem zgody na ich zapisywanie. Więcej o <a class=" cookie-links" href="{{ url_for('main.cookies') }} ">ciasteczkach.</a></span></p>
 
-        <button type="button" class="btn btn-primary" id="acceptCookie">Save changes</button>
-      </div>
+</div>
+<div class="col-3 d-flex justify-content-center align-items-center">
+
+        <button type="button" class="btn btn-info" id="acceptCookie">Zgadzam się</button>
+ </div></div></div>
     </div>
   </div>
 </div>

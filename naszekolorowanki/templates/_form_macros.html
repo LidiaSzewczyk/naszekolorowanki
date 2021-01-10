@@ -3,7 +3,7 @@
 <div class="form-group">
     {% with cls = "form-control is-invalid" if field.errors else "form-control" %}
         {% if field.widget.input_type == 'submit' %}
-            {% set cls = "btn btn-outline-info custom-btn" %}
+            {% set cls = "btn btn-info custom-btn" %}
         {% endif %}
 
         {% if field.widget.input_type == 'file' %}

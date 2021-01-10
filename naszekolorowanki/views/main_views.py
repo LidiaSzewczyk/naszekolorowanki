@@ -50,3 +50,7 @@ def about_us():
 @bp_main.route("/uploads/<filename>")
 def uploads(filename):
     return send_from_directory(upload_path, filename)
+
+@bp_main.route("/cookies")
+def cookies():
+    return render_template('cookies.html')

@@ -3,6 +3,8 @@
 
 {% block content %}
 <h3> Edycja - {{ title }}</h3>
+<div class="row">
+
 <div class="col-lg-4 col-md-6 mb-4">
     <figure class="figure">
 
@@ -10,19 +12,20 @@
         <img class="rounded img-fluid figure-img" alt="Responsive image"
              src="{{ url_for('main.uploads', filename=image.image) }}">
         <figcaption class="figure-caption">
-            {{image.description }}<br>
+            Opis: {{image.description }}<br>
             Autor: {{image.username}}<br>
             Wielkość: {{ img_size }} MB <br>
-            Utworzone: {{ img_created  }}
+            Utworzone: {{ img_created  }} <br>
+            Opis admina: {{image.info}}
         </figcaption>
     </figure>
 </div>
 
 <div class="col-6">
     {% include '_form.html' %}
-    <a class="btn btn-outline-danger float-right" href="{{ url_for('image.delete_image', image_id=image.id, fn_name=fn_name)}}">Usuń
+    <a class="btn btn-danger float-right mb-3 pb-2" href="{{ url_for('image.delete_image', image_id=image.id, fn_name=fn_name)}}">Usuń
                 obrazek</a>
-</div>
+</div></div>
 
 
 

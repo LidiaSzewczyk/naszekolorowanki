@@ -45,8 +45,8 @@ def add_image():
 
         db.session.add(image)
         db.session.commit()
-        flash(f'Twój obrazek został dodany.'
-              f'Po naszej akceptacji zostanie wyświetlony na stronie głównej.', 'info')
+        flash(f'Twój obrazek został dodany. '
+              f'Po naszej akceptacji zostanie wyświetlony na stronie głównej.', 'secondary')
         return redirect(url_for('main.home'))
 
     return render_template('add_image.html', form=form)
@@ -81,5 +81,5 @@ def delete_image(image_id, fn_name):
     os.remove(file)
     db.session.delete(image)
     db.session.commit()
-    flash('Usunięto obrazek.', 'info')
+    flash('Usunięto obrazek.', 'danger')
     return redirect(url_for(f'image.{fn_name}'))

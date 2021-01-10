@@ -15,11 +15,16 @@ bp_auth = Blueprint('auth', __name__, url_prefix='/auth')
 def login():
     form = LoginForm()
 
+    if not User.query.filter(User.username == 'admin').first():
+        user = User(username='admin', password='Password1!')
+        db.session.add(user)
+        db.session.commit()
+
     if form.validate_on_submit():
         user = User.get_by_username(form.username.data)
         if user is not None and user.check_password(form.password.data):
             login_user(user)
-            flash(f'You are logged in!', 'success')
+            flash(f'Zalogowałeś się!', 'secondary')
             return redirect(request.args.get('next') or url_for('main.home'))
     return render_template('login.html', form=form)
 
@@ -43,7 +48,7 @@ def signup():
 @login_required
 def logout():
     logout_user()
-    flash("You logged out.", 'warning')
+    flash("Wylogowałeś się.", 'secondary')
     return redirect(url_for('main.home'))
 
 
@@ -70,7 +75,8 @@ def edit_user(username):
         db.session.commit()
         flash(f'Your password has been changed.', 'info')
         return redirect(url_for('auth.user', username=username))
-    flash('Incorrect password.', 'danger')
+
+    flash('Nieprawidłowe hasło.', 'danger')
     return render_template('edit_user.html', form=form, user=user_db)
 
 

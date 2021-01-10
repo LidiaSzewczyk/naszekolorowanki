@@ -12,15 +12,18 @@
     <div class="col-lg-4 col-md-6 mb-4">
         <figure class="figure">
 
-
+            <a href="{{ url_for('image.edit_image', image_id=image.id, fn_name=fn_name, title=title)}}">
             <img class="rounded img-fluid figure-img" alt="Responsive image"
-                 src="{{ url_for('main.uploads', filename=image.image) }}">
+                 src="{{ url_for('main.uploads', filename=image.image) }}"></a>
             <figcaption class="figure-caption">
-                {{image.description }}<br>
-                Autor: {{image.username}}
+                Opis: {{image.description }}<br>
+                Autor: {{image.username}} <br>
+                {% if  image.info %}
+                Opis admina: {{image.info}}
+                {% endif %}
             </figcaption>
 
-            <a class="btn btn-outline-primary float-right"
+            <a class="btn btn-info float-right"
                href="{{ url_for('image.edit_image', image_id=image.id, fn_name=fn_name, title=title)}}">Edytuj</a>
         </figure>
     </div>

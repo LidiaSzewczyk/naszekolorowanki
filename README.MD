@@ -5,13 +5,13 @@ usuwanie obrazków
 
 
 TODO
-usunąc rejestrację
+
 formularz do maila/wiadomości do nas
 nasz opis
 resize obrazków
-tło
-grid na home
-nie działa menu po zmniejszeniu
 https
 prawne aspekty
 zmiana podświetlania nagłówka
+
+
+szukanie

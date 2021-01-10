@@ -5,12 +5,15 @@ from wtforms.validators import DataRequired
 
 
 class ImageForm(FlaskForm):
-    username = StringField('Your name', validators=[DataRequired(message='This field is required.')])
-    image = FileField("Wybierz obrazek", validators=[FileAllowed(["jpg", "jpeg", "png"], "Tylko obrazki.")])
-    description = StringField('Twój opis', render_kw={"placeholder": "test"})
+    username = StringField('Twoje imię lub pseudonim', validators=[DataRequired(message='Wypełnij to pole.')])
+    image = FileField("Wybierz obrazek", validators=[FileAllowed(["jpg", "jpeg", "png"], "Tylko obrazki."), DataRequired(message="Dodaj obrazek")])
+    description = StringField('Twój opis', render_kw={"placeholder": "Możesz wpisać nazwę kolorowanki, stosowaną technikę."})
     submit = SubmitField('Dodaj obrazek')
 
 
 class EditImageForm(FlaskForm):
-    status = BooleanField(label='Status')
-    submit = SubmitField('Zmień status')
+    username = StringField('Autor')
+    description = StringField('Opis autora')
+    info = StringField('Nasze informacje')
+    status = BooleanField(label='Zaakceptowane')
+    submit = SubmitField('Zatwierdź')
