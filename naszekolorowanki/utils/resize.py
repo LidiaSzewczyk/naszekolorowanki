@@ -23,4 +23,4 @@ def resize(item):
         image.save(file_path + "_small" + extension, 'JPEG', quality=90)
 
 
-resize('/home/lidka/projects/python/naszekolorowanki/naszekolorowanki/uploaded_pictures/20201223T174329ac85_drzewo.jpg')
+resize('/home/lidka/projects/python/naszekolorowanki/naszekolorowanki/uploaded_pictures/20210110T202045lidkaaf_IMG_20210102_135051.jpg')

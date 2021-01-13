@@ -39,7 +39,7 @@
 {% if  errors %}
 <div class="alert alert-danger" role="alert">
     {% for field in errors %}
-        <b>{{ form[field].label | capitalize }} field has following errors:</b>
+        <b> Formularz </b>{{ form[field].label | capitalize }} <b> pokazuje błąd:</b>
             {% for error in errors[field] %}
                 {{ error }} <br>
             {% endfor %}

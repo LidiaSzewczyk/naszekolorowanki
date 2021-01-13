@@ -1,14 +1,15 @@
 import base64
 
-from flask import Blueprint, render_template, flash, redirect, url_for, send_from_directory
+from flask import Blueprint, render_template, flash, redirect, url_for, send_from_directory, request
 from flask_wtf.file import FileRequired
-from sqlalchemy import desc
+from sqlalchemy import desc, or_
 
 from naszekolorowanki import login_manager, db
+from naszekolorowanki.forms.filter_form import FilterForm
 from naszekolorowanki.forms.image_forms import ImageForm
 from naszekolorowanki.models.image_models import Image
-from naszekolorowanki.models.user_models import User
-from naszekolorowanki.utils.utils import upload_path, save_image
+
+from naszekolorowanki.utils.utils import upload_path
 
 
 # @login_manager.user_loader
@@ -21,8 +22,13 @@ bp_main = Blueprint('main', __name__, url_prefix='/')
 
 @bp_main.route('/', methods=['GET'])
 def home():
-    images = Image.query.filter_by(status=True).order_by(desc(Image.date)).all()
-    return render_template('home.html', images=images)
+    filter_form = FilterForm(request.args, meta={"csrf": False})
+    page = request.args.get('page', 1, type=int)
+    images = Image.query.filter(or_(Image.username.contains(f'{filter_form.search.data.strip()}'),
+                                    Image.description.contains(f'%{filter_form.search.data.strip()}%')))\
+        .filter_by(status=True).order_by(desc(Image.date)).paginate(page=page, per_page=9)
+
+    return render_template('home.html', images=images, form=filter_form)
 
 
 @bp_main.route('/about_us', methods=['GET'])

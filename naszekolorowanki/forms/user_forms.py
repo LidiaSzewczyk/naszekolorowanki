@@ -7,23 +7,23 @@ from naszekolorowanki.models.user_models import User
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Your username:', validators=[DataRequired(message='This field is required.')])
-    password = PasswordField('Password:', validators=[DataRequired(message='This field is required.'), Length(min=5,
-                                                                                                              message='Field must be at least 5 characters long.')])
-    remember_me = BooleanField('Keep me logged in')
-    submit = SubmitField('Log in')
+    username = StringField('Nazwa użytkownika', validators=[DataRequired(message='To pole jest wymagane.')])
+    password = PasswordField('Hasło', validators=[DataRequired(message='To pole jest wymagane.'), Length(min=5,
+                                                                                                              message='Długość hasła to min 5 znaków.')])
+    remember_me = BooleanField('Nie wylogowuj')
+    submit = SubmitField('Zaloguj się')
 
 
 class SignUpForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(message='This field is required.'), Length(3, 80),
+    username = StringField('Nazwa użytkownika', validators=[DataRequired(message='To pole jest wymagane.'), Length(3, 80),
                                                    Regexp('^[A-Za-z0-9_]{3,}$',
-                                                          message='Usernames consist of numbers, letters and underscore.')])
+                                                          message='Nazwa  użytkownika składa się z liter, cyfr, podkreśleń.')])
     # email = StringField('Email', validators=[DataRequired(message='This field is required.'), Length(1, 120), Email()])
-    password = PasswordField('Password', validators=[DataRequired(message='This field is required.'),
-                                                     Length(min=5, message='Field must be at least 5 characters long.'),
-                                                     EqualTo('password2', message='Password must match.')])
-    password2 = PasswordField('Confirm Password', validators=[DataRequired(message='This field is required.')])
-    submit = SubmitField('Sign up')
+    password = PasswordField('Hasło', validators=[DataRequired(message='To pole jest wymagane.'),
+                                                     Length(min=5, message='Długość hasła to min 5 znaków.'),
+                                                     EqualTo('password2', message='Hasło musi pasować.')])
+    password2 = PasswordField('Potwierdź hasło', validators=[DataRequired(message='To pole jest wymagane.')])
+    submit = SubmitField('Zarejestruj')
 
     # @staticmethod
     # def validate_email(self, email_field):
@@ -33,37 +33,37 @@ class SignUpForm(FlaskForm):
     @staticmethod
     def validate_username(self, username_field):
         if User.query.filter_by(username=username_field.data).first():
-            raise ValidationError('This username is already taken.')
+            raise ValidationError('Ta nazwa użytkownika już jest zajęta.')
 
 
 class ChangePasswordForm(FlaskForm):
-    old_password = PasswordField('Current password',
-                                 validators=[DataRequired(message='This field is required.')])
+    old_password = PasswordField('Obecne hasło',
+                                 validators=[DataRequired(message='To pole jest wymagane.')])
 
-    new_password = PasswordField('New password', validators=[DataRequired(message='This field is required.'),
+    new_password = PasswordField('Nowe hasło', validators=[DataRequired(message='To pole jest wymagane.'),
                                                              Length(min=5,
-                                                                    message='Field must be at least 5 characters long.'),
-                                                             EqualTo('new_password2', message='Password must match.')])
-    new_password2 = PasswordField('Confirm new password', validators=[DataRequired(message='This field is required.')
+                                                                    message='Długość hasła to min 5 znaków.'),
+                                                             EqualTo('new_password2', message='Hasło musi pasować.')])
+    new_password2 = PasswordField('Potwierdź nowe hasło', validators=[DataRequired(message='To pole jest wymagane.')
                                                                       ])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Zatwierdź')
 
     @staticmethod
     def validate_old_password(self, password):
         user = User.query.filter_by(username=current_user.username).first_or_404()
         if not user.check_password(password.data):
-            raise ValidationError('Incorrect password')
+            raise ValidationError('Nieprawidłowe hasło')
 
 
 class DeleteUserForm(FlaskForm):
-    password = PasswordField('Password', validators=[DataRequired(message='This field is required.'), Length(min=5,
-                                                                                                             message='Field must be at least 5 characters long.')])
-    submit = SubmitField('Delete your account')
+    password = PasswordField('Hasło', validators=[DataRequired(message='To pole jest wymagane.'), Length(min=5,
+                                                                                                             message='Długość hasła to min 5 znaków.')])
+    submit = SubmitField('Skasuj Twoje konto')
 
     @staticmethod
     def validate_password(self, password):
         user = User.query.filter_by(username=current_user.username).first_or_404()
         if not user.check_password(password.data):
-            raise ValidationError('Incorrect password')
+            raise ValidationError('Nieprawidłowe hsało')
 
 

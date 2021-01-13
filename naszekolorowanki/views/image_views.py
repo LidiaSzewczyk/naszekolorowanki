@@ -1,7 +1,7 @@
 import os
 import time
 
-from flask import Blueprint, flash, redirect, url_for, render_template, send_from_directory, request
+from flask import Blueprint, flash, redirect, url_for, render_template, send_from_directory, request, current_app
 from flask_login import login_required
 
 from naszekolorowanki import db, login_manager
@@ -40,7 +40,9 @@ def add_image():
     form = ImageForm()
 
     if form.validate_on_submit():
-        filename = save_image(form.image)
+        print(form.username.data)
+        print(type(form.username.data))
+        filename = save_image(form.image, form.username.data)
         image = Image(username=form.username.data, image=filename, description=form.description.data)
 
         db.session.add(image)
@@ -52,9 +54,9 @@ def add_image():
     return render_template('add_image.html', form=form)
 
 
-@bp_image.route("/uploads/<filename>")
-def uploads(filename):
-    return send_from_directory(upload_path, filename)
+# @bp_image.route("/uploads/<filename>")
+# def uploads(filename):
+#     return send_from_directory(upload_path, filename)
 
 
 @bp_image.route('/edit_image/<int:image_id>/<string:fn_name>/<string:title>', methods=['GET', 'POST'])
@@ -75,6 +77,7 @@ def edit_image(image_id, fn_name, title):
 
 
 @bp_image.route('/delete_image/<int:image_id>/<string:fn_name>', methods=['GET'])
+@login_required
 def delete_image(image_id, fn_name):
     image = Image.query.get_or_404(image_id)
     file = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'uploaded_pictures', image.image)
@@ -83,3 +86,41 @@ def delete_image(image_id, fn_name):
     db.session.commit()
     flash('Usunięto obrazek.', 'danger')
     return redirect(url_for(f'image.{fn_name}'))
+
+
+@bp_image.route('/uploads/<path:filename>', methods=['GET', 'POST'])
+def download(filename):
+    uploads = os.path.join(current_app.root_path, 'uploaded_pictures')
+    # uploads = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
+    return send_from_directory(directory=uploads, filename=filename)
+
+
+# @bp_image.route('/resize_image/<int:image_id>/', methods=['GET', 'POST'])
+# def resize_image(image_id):
+#     if os.path.isfile(item):
+#         image = Image.open(item)
+#         file_path, extension = os.path.splitext(item)
+#
+#         size = image.size
+#
+#         new_image_height = 190
+#         new_image_width = int(size[1] / size[0] * new_image_height)
+#
+#         image = image.resize((new_image_height, new_image_width), Image.ANTIALIAS)
+#         image.save(file_path + "_small" + extension, 'JPEG', quality=90)
+#
+#     form = ImageForm()
+#
+#     if form.validate_on_submit():
+#         print(form.username.data)
+#         print(type(form.username.data))
+#         filename = save_image(form.image, form.username.data)
+#         image = Image(username=form.username.data, image=filename, description=form.description.data)
+#
+#         db.session.add(image)
+#         db.session.commit()
+#         flash(f'Twój obrazek został dodany. '
+#               f'Po naszej akceptacji zostanie wyświetlony na stronie głównej.', 'secondary')
+#         return redirect(url_for('main.home'))
+#
+#     return render_template('add_image.html', form=form)

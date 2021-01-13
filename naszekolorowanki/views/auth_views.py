@@ -24,7 +24,6 @@ def login():
         user = User.get_by_username(form.username.data)
         if user is not None and user.check_password(form.password.data):
             login_user(user)
-            flash(f'Zalogowałeś się!', 'secondary')
             return redirect(request.args.get('next') or url_for('main.home'))
     return render_template('login.html', form=form)
 
@@ -38,8 +37,7 @@ def signup():
         user = User(username=form.username.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash(f'Hello, please log in!', 'info')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('main.home'))
 
     return render_template('signup.html', form=form)
 
@@ -48,7 +46,6 @@ def signup():
 @login_required
 def logout():
     logout_user()
-    flash("Wylogowałeś się.", 'secondary')
     return redirect(url_for('main.home'))
 
 
@@ -73,10 +70,9 @@ def edit_user(username):
     if form.validate_on_submit():
         user_db.password = form.new_password.data
         db.session.commit()
-        flash(f'Your password has been changed.', 'info')
+        flash(f'Twoje hasło zostało zmienione.', 'info')
         return redirect(url_for('auth.user', username=username))
 
-    flash('Nieprawidłowe hasło.', 'danger')
     return render_template('edit_user.html', form=form, user=user_db)
 
 
@@ -93,7 +89,7 @@ def delete_user(username):
     if form.validate_on_submit():
         db.session.delete(user_db)
         db.session.commit()
-        flash(f'You deleted your account.', 'info')
+        flash(f'Usunąłeś konto ', 'danger')
         return redirect(url_for('main.home'))
-    flash('Incorrect password.', 'danger')
+    flash('Nieprawidłowe hasło.', 'danger')
     return redirect(url_for('auth.user', username=current_user.username))

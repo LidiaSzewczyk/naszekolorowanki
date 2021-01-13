@@ -12,17 +12,22 @@
         <img class="rounded img-fluid figure-img" alt="Responsive image"
              src="{{ url_for('main.uploads', filename=image.image) }}">
         <figcaption class="figure-caption">
+            Nazwa pliku: {{ image.image}}<br>
             Opis: {{image.description }}<br>
             Autor: {{image.username}}<br>
             Wielkość: {{ img_size }} MB <br>
             Utworzone: {{ img_created  }} <br>
-            Opis admina: {{image.info}}
+            Opis admina: {{image.info}}<br>
+             <a class="btn btn-info float-left mb-3 pb-2" href="{{ url_for('image.download', filename=image.image, fn_name=fn_name)}}">Pobierz</a>
         </figcaption>
     </figure>
 </div>
 
 <div class="col-6">
     {% include '_form.html' %}
+
+
+    <br>
     <a class="btn btn-danger float-right mb-3 pb-2" href="{{ url_for('image.delete_image', image_id=image.id, fn_name=fn_name)}}">Usuń
                 obrazek</a>
 </div></div>

@@ -1,17 +1,8 @@
-##Projekt dla mojej córki
-###dodawanie obrazków, weryfikacja obrazków przez admina, 
-wyświetlenie zaakceptowanych obrazków na stronie głównej,
-usuwanie obrazków
+# Projekt dla mojej córki
+### Możliwość dodawania obrazków, wyszukiwania po nazwie i opisie. 
+### Dla administartora: weryfikacja obrazków przed wyświetleniem na stronie głównej:możliwe pobranie obrazka, dodanie własnego opisu, zmiana statusu, usunięcie. Dodawanie nowego admina, zmiana hasła, usunięcie konta.
 
 
-TODO
 
-formularz do maila/wiadomości do nas
-nasz opis
-resize obrazków
-https
-prawne aspekty
-zmiana podświetlania nagłówka
+T
 
-
-szukanie

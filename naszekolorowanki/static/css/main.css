@@ -135,3 +135,24 @@ body {
     background-color: #824360;
     border-color: #824360;
 }
+
+
+.btn-search-our {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border: none
+;
+
+}
+input#search {
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: #345163;
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+}
+
+input#file-upload-button {
+        border-color: #537284;
+    background-color: #537284;
+}
