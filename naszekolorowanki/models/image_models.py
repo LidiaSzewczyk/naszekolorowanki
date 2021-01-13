@@ -19,6 +19,4 @@ class Image(db.Model):
     def get_by_username(username):
         return Image.query.filter_by(username=username)
 
-    @staticmethod
-    def latest(num):
-        return Image.query.order_by(desc(Image.date)).limit(num)
+

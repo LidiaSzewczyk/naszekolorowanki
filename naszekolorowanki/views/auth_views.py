@@ -1,6 +1,6 @@
 from os import abort
 
-from flask import Blueprint, request, url_for, render_template, flash
+from flask import Blueprint, request, url_for, render_template, flash, current_app
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.utils import redirect
 
@@ -15,8 +15,8 @@ bp_auth = Blueprint('auth', __name__, url_prefix='/auth')
 def login():
     form = LoginForm()
 
-    if not User.query.filter(User.username == 'admin').first():
-        user = User(username='admin', password='Password1!')
+    if not User.query.filter(User.username == current_app.config["USER_NAME"]).first():
+        user = User(username=current_app.config["USER_NAME"], password=current_app.config["USER_PASSWORD"])
         db.session.add(user)
         db.session.commit()
 

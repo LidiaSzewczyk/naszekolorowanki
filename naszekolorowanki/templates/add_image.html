@@ -4,7 +4,9 @@
 {% block content %}
 
 <div class="col-6">
-{% include '_form.html' %}
+    {% with enctype = True %}
+    {% include '_form.html' %}
+    {% endwith %}
 
     <p><small>
         Dodając obrazek, potwierdzasz, że jesteś jego autorem oraz

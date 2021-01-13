@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, RadioField
+from wtforms import StringField
 
 
 class FilterForm(FlaskForm):
     search = StringField(label='Szukaj', render_kw={"placeholder": "Szukaj"})
-    # status = RadioField(label='Status', choices=[(True, "Zaakceptowane"), (False, 'Niezaakceptowane')])

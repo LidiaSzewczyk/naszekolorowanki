@@ -4,3 +4,4 @@ migrations
 *.db
 naszekolorowanki/app.db
 naszekolorowanki/uploaded_pictures/*.*
+config.py

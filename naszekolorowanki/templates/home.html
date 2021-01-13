@@ -1,10 +1,10 @@
 {% extends '_base.html' %}
 
 {% block content %}
-        </div>
+</div>
 <form method="get" class="float-right">
-                	{{form.search}}
-                     <button class="btn btn-info custom-btn btn-sm btn-search-our" type="submit">Szukaj</button>
+    {{form.search}}
+    <button class="btn btn-info custom-btn btn-sm btn-search-our" type="submit">Szukaj</button>
 
 </form>
 
@@ -55,22 +55,22 @@
     </a>
 
     {% for page_num in images.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-{% if page_num %}
+    {% if page_num %}
 
-            {% if images.page == page_num %}
-            <a href="{{ url_for('main.home', page=page_num) }}"
-               class="btn btn-dark">
-                {{ page_num }}
-            </a>
-            {% else %}
-            <a href="{{ url_for('main.home', page=page_num) }}"
-               class="btn btn-outline-dark">
-                {{ page_num }}
-            </a>
-            {% endif %}
-        {% else %}
-            ...
-        {% endif %}
+    {% if images.page == page_num %}
+    <a href="{{ url_for('main.home', page=page_num) }}"
+       class="btn btn-dark">
+        {{ page_num }}
+    </a>
+    {% else %}
+    <a href="{{ url_for('main.home', page=page_num) }}"
+       class="btn btn-outline-dark">
+        {{ page_num }}
+    </a>
+    {% endif %}
+    {% else %}
+    ...
+    {% endif %}
     {% endfor %}
     <a href="{{ url_for('main.home', page=images.next_num) }}"
        class="btn btn-outline-dark
@@ -79,7 +79,7 @@
     </a>
 </div>
 <p class="text-right mt-3">
-   Strona {{ images.page }} z {{ images.pages }}
+    Strona {{ images.page }} z {{ images.pages }}
 </p>
 
 {% endblock %}

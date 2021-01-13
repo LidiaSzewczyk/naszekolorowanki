@@ -9,23 +9,26 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 
 
-def create_app():
+def create_app(config_env=''):
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = b'\x93\xb4\xbf\xdc\x83\x86\x00\xcc\xce\x01WZ\xb9\xa8\xe1E'
-    app.config[
-        'SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(os.path.abspath(os.path.dirname(__file__)), "app.db")}'
 
-    from naszekolorowanki.views.main_views import bp_main
-    from naszekolorowanki.views.auth_views import bp_auth
-    from naszekolorowanki.views.image_views import bp_image
-
-    app.register_blueprint(bp_main)
-    app.register_blueprint(bp_auth)
-    app.register_blueprint(bp_image)
+    if not config_env:
+        config_env = app.env
+    app.config.from_object(f'config.{config_env.capitalize()}Config')
 
     login_manager.session_protection = "strong"
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
+
+    with app.app_context():
+        from naszekolorowanki.views.auth_views import bp_auth
+        app.register_blueprint(bp_auth)
+
+        from naszekolorowanki.views.image_views import bp_image
+        app.register_blueprint(bp_image)
+
+        from naszekolorowanki.views.main_views import bp_main
+        app.register_blueprint(bp_main)
 
     db.init_app(app)
 
