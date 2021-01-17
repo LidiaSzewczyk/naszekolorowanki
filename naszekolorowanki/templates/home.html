@@ -1,93 +1,91 @@
 {% extends '_base.html' %}
 
 {% block content %}
-</div>
-<form method="get" class="float-right">
-    {{form.search}}
-    <button class="btn btn-info custom-btn btn-sm btn-search-our" type="submit">Szukaj</button>
-
-</form>
-
-<h3 class="p-3">Cześć!</h3>
-
-<p><span>Widzimy, że odwiedziłeś naszą stronę. Istnieje ona po to, by dzielić się pomysłami na kolorowanki i rysunki. Może ktoś naprawdę się zainspiruje i zostanie wielkim artystą? Miło by było... :) Same bardzo lubimy kolorować, ale czasem miewamy braki weny. Przeglądaj do woli prace innych, możesz też wstawić własne dzieła.</span>
-</p>
-<div class="row my-2 card-wrapper">
-    {% set count = namespace(value=0) %}
-    {% if images %}
-
-    {% for image in images.items %}
-    {% with home_image = url_for('main.uploads', filename=image.image) %}
-    {% set count.value = count.value + 1 %}
-
-
-    <div class="col-lg-4 col-md-6 mb-4">
-        <figure class="figure">
-
-            <a>
-                <img id="myImg" class="rounded img-fluid figure-img z-depth-1 home-page-image" alt="Responsive image"
-                     src="{{home_image}}" data-toggle="modal"
-                     data-target="#modal{{count.value }}">
-            </a>
-            <figcaption class="figure-caption font-our">
-                {{image.description }}<br>
-                Autor: {{image.username}}
-            </figcaption>
-        </figure>
-
-        {% include '_modal_image.html' %}
-
-
     </div>
+        <form method="get" class="float-right">
+            {{form.search}}
+            <button class="btn btn-info custom-btn btn-sm btn-search-our" type="submit">Szukaj</button>
+
+        </form>
+
+        <h3 class="p-3">Cześć!</h3>
+
+        <p><span>Widzimy, że odwiedziłeś naszą stronę. Istnieje ona po to, by dzielić się pomysłami na kolorowanki i rysunki. Może ktoś naprawdę się zainspiruje i zostanie wielkim artystą? Miło by było... :) Same bardzo lubimy kolorować, ale czasem miewamy braki weny. Przeglądaj do woli prace innych, możesz też wstawić własne dzieła.</span>
+        </p>
+        <div class="row my-2 card-wrapper">
+            {% set count = namespace(value=0) %}
+            {% if images %}
+
+            {% for image in images.items %}
+            {% with home_image = url_for('main.uploads', filename=image.image) %}
+            {% with home_thumbnail = url_for('main.uploads', filename=image.thumbnail) %}
+            {% set count.value = count.value + 1 %}
 
 
-    {% endwith %}
-    {% endfor %}
-    {% endif %}
-</div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <figure class="figure">
+
+                    <a>
+                        <img id="myImg" class="rounded img-fluid figure-img z-depth-1 home-page-image" alt="Responsive image"
+                             src="{{home_thumbnail}}" data-toggle="modal"
+                             data-target="#modal{{count.value }}">
+                    </a>
+                    <figcaption class="figure-caption font-our">
+                        {{image.description }}<br>
+                        Autor: {{image.username}}
+                    </figcaption>
+                </figure>
+            </div>
+            {% include '_modal_image.html' %}
+
+            {% endwith %}
+            {% endwith %}
+            {% endfor %}
+            {% endif %}
+        </div>
 
 
-<div class="text-right">
-    <a href="{{ url_for('main.home', page=images.prev_num) }}"
-       class="btn btn-outline-dark
-       {% if images.page == 1 %}disabled{% endif %}">
-        &laquo;
-    </a>
+        <div class="text-right">
+            <a href="{{ url_for('main.home', page=images.prev_num) }}"
+               class="btn btn-outline-dark
+               {% if images.page == 1 %}disabled{% endif %}">
+                &laquo;
+            </a>
 
-    {% for page_num in images.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-    {% if page_num %}
+            {% for page_num in images.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
 
-    {% if images.page == page_num %}
-    <a href="{{ url_for('main.home', page=page_num) }}"
-       class="btn btn-dark">
-        {{ page_num }}
-    </a>
-    {% else %}
-    <a href="{{ url_for('main.home', page=page_num) }}"
-       class="btn btn-outline-dark">
-        {{ page_num }}
-    </a>
-    {% endif %}
-    {% else %}
-    ...
-    {% endif %}
-    {% endfor %}
-    <a href="{{ url_for('main.home', page=images.next_num) }}"
-       class="btn btn-outline-dark
-       {% if images.page == images.pages %}disabled{% endif %}">
-        &raquo;
-    </a>
-</div>
-<p class="text-right mt-3">
-    Strona {{ images.page }} z {{ images.pages }}
-</p>
+                {% if images.page == page_num %}
+                    <a href="{{ url_for('main.home', page=page_num) }}"
+                       class="btn btn-dark">
+                        {{ page_num }}
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('main.home', page=page_num) }}"
+                       class="btn btn-outline-dark">
+                        {{ page_num }}
+                    </a>
+                {% endif %}
+            {% else %}
+            ...
+            {% endif %}
+            {% endfor %}
+            <a href="{{ url_for('main.home', page=images.next_num) }}"
+               class="btn btn-outline-dark
+               {% if images.page == images.pages %}disabled{% endif %}">
+                &raquo;
+            </a>
+        </div>
+        <p class="text-right mt-3">
+            Strona {{ images.page }} z {{ images.pages }}
+        </p>
 
-{% endblock %}
+    {% endblock %}
 
-{% block scripts %}
-{{ super() }}</div>
-<script>
+    {% block scripts %}
+    {{ super() }}</div>
+    <script>
 
-</script>
+    </script>
 
 {% endblock %}

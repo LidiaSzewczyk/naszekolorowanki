@@ -5,12 +5,12 @@
 <h3> Edycja - {{ title }}</h3>
 <div class="row">
 
-<div class="col-lg-4 col-md-6 mb-4">
+<div class="col-lg-6 col-md-6 mb-4">
     <figure class="figure">
 
-
+         <a  href="{{ url_for('image.download', filename=image.image, fn_name=fn_name)}}">
         <img class="rounded img-fluid figure-img" alt="Responsive image"
-             src="{{ url_for('main.uploads', filename=image.image) }}">
+             src="{{ url_for('main.uploads', filename=image.image) }}"></a>
         <figcaption class="figure-caption">
             Nazwa pliku: {{ image.image}}<br>
             Opis: {{image.description }}<br>
@@ -23,7 +23,7 @@
     </figure>
 </div>
 
-<div class="col-6">
+<div class="col-lg-6">
     {% include '_form.html' %}
 
 

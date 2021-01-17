@@ -3,27 +3,24 @@
 {% set btn_id = 'deleteForm' %}
 
 {% block content %}
-<div class="col-6">
-<h3>Cześć <b>{{user.username}}</b></h3><br>
-<a class="btn btn-outline-success"  href="{{ url_for('auth.signup') }} ">Rejestracja nowego admina</a><br><br>
-<a class="btn btn-outline-primary" href="{{ url_for('auth.edit_user', username=current_user.username)}}">Zmień hasło</a><br><br>
-<button class="btn btn-outline-danger"  id="{{btn_id}}" data-target="#{{modal_id}}" data-toggle="modal" >Usuń konto</button>
-    <br>
+    <div class="col-6">
+    <h3>Cześć <b>{{user.username}}</b></h3><br>
+    <a class="btn btn-outline-success"  href="{{ url_for('auth.signup') }} ">Rejestracja nowego admina</a><br><br>
+    <a class="btn btn-outline-primary" href="{{ url_for('auth.edit_user', username=current_user.username)}}">Zmień hasło</a><br><br>
+    <button class="btn btn-outline-danger"  id="{{btn_id}}" data-target="#{{modal_id}}" data-toggle="modal" >Usuń konto</button>
+        <br>
 
-
-{% include '_modal-form.html' %}
-
-
+    {% include '_modal-form.html' %} \
 {% endblock %}
+
 
 {% block scripts %}
-{{ super() }}</div>
-<script>
-$('#{{modal_id}}').on('shown.bs.modal', function () {
-  $('#{{btn_id}}').trigger('focus')
-})
-</script>
+    {{ super() }}</div>
+    <script>
+    $('#{{modal_id}}').on('shown.bs.modal', function () {
+      $('#{{btn_id}}').trigger('focus')
+    })
+    </script>
 
 {% endblock %}
 
-<!-- TODO  zrobię formularz do coockies, porozglądać się :\ bez gotowców-->
