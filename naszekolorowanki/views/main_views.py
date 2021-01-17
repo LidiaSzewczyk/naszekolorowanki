@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template,  send_from_directory, request, current_app
+from flask import Blueprint, render_template, send_from_directory, request, current_app
 from sqlalchemy import desc, or_
 
 from naszekolorowanki.forms.filter_form import FilterForm
@@ -15,21 +15,6 @@ def home():
                                     Image.description.contains(f'%{form.search.data.strip()}%'))) \
         .filter_by(status=True).order_by(desc(Image.date)).paginate(page=page, per_page=9)
     return render_template('home.html', images=images, form=form)
-
-
-    # if form.validate_on_submit():
-    #     images = Image.query.filter(or_(Image.username.contains(f'{form.search.data.strip()}'),
-    #                                     Image.description.contains(f'%{form.search.data.strip()}%'))) \
-    #         .filter_by(status=True).order_by(desc(Image.date)).paginate(page=page, per_page=9)
-    #     return render_template('home.html', images=images, form=form)
-
-    # images = Image.query.filter_by(status=True).paginate(page=page, per_page=9)
-    #
-    # return render_template('home.html', form=form, images=images)
-
-
-
-
 
 
 @bp_main.route("/uploads/<filename>")
