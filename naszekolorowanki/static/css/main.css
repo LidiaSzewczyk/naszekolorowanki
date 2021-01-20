@@ -67,9 +67,10 @@ body {
 .admin:hover, .cookie-link:hover, .cookie-link {
     color: #345163;
 }
-.admin:hover {
-    text-rendering: ;
-}
+
+/*.admin:hover {*/
+/*    text-rendering: ;*/
+/*}*/
 
 .cookie-links, .cookie-links:hover {
     color: #3B83AC;
@@ -140,10 +141,10 @@ body {
 .btn-search-our {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
-    border: none
-;
+    border: none;
 
 }
+
 input#search {
     border-style: solid;
     border-width: 1.5px;
@@ -153,6 +154,15 @@ input#search {
 }
 
 input#file-upload-button {
-        border-color: #537284;
+    border-color: #537284;
     background-color: #537284;
+}
+
+.full-view {
+    width: 100%;
+    max-width: calc(100% - 192px);
+}
+
+.full-width {
+    width: 100%;
 }

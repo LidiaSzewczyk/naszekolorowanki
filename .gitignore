@@ -3,4 +3,4 @@
 migrations
 *.db
 naszekolorowanki/app.db
-naszekolorowanki/uploaded_pictures/*.*
+naszekolorowanki/uploaded_pictures/*

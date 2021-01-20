@@ -10,7 +10,7 @@
         {% for image in images %}
 
         <div class="col-lg-4 col-md-6 mb-4">
-            <figure class="figure">
+            <figure class="figure full-width">
 
                 <a href="{{ url_for('image.edit_image', image_id=image.id, fn_name=fn_name, title=title)}}">
                 <img class="rounded img-fluid figure-img" alt="Responsive image"
