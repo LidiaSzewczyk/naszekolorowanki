@@ -1,0 +1,35 @@
+{% extends '_base.html' %}
+{% from "_form_macros.html" import render_field  %}
+
+{% block content %}
+    <h3 class="p-3">{{ title }}</h3>
+    <br>
+
+    <div class="row my-2 card-wrapper">
+        {% if images %}
+        {% for image in images %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+            <figure class="figure full-width">
+
+                <a href="{{ url_for('image.edit_image', image_id=image.id, fn_name=fn_name, title=title)}}">
+                <img class="rounded img-fluid figure-img" alt="Responsive image"
+                     src="{{ url_for('main.uploads', filename=image.thumbnail) }}"></a>
+                <figcaption class="figure-caption">
+                    Opis: {{image.description }}<br>
+                    Autor: {{image.username}} <br>
+                    {% if  image.info %}
+                    Opis admina: {{image.info}}
+                    {% endif %}
+                </figcaption>
+
+                <a class="btn btn-info float-right"
+                   href="{{ url_for('image.edit_image', image_id=image.id, fn_name=fn_name, title=title)}}">Edytuj</a>
+            </figure>
+        </div>
+
+        {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+

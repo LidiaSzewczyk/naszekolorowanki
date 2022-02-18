@@ -1,0 +1,51 @@
+{% macro render_field(field) %}
+
+<div class="form-group">
+    {% with cls = "form-control is-invalid" if field.errors else "form-control" %}
+        {% if field.widget.input_type == 'submit' %}
+            {% set cls = "btn btn-info custom-btn" %}
+        {% endif %}
+
+        {% if field.widget.input_type == 'file' %}
+            {% set cls = "form-control-file" %}
+        {% endif %}
+
+
+    <!--    selct radiobatton, wewnątrz makro można robić include-->
+        {% if field.widget.input_type == 'checkbox' %}
+            {{ field }}
+            {{ field.label }}
+
+
+        {% else %}
+            {% if field.widget.input_type != 'hidden' and field.widget.input_type != 'submit' %}
+                {{ field.label(class="form-label") }}:
+            {% endif %}
+
+            {{ field(class=cls) }}
+
+        {% endif %}
+    {% endwith %}
+
+    {% for error in field.errors %}
+    <div class="invalid-feedback"> {{ error }}</div>
+    {% endfor %}
+
+</div>
+{% endmacro %}
+
+
+{% macro error_messages(errors, form) %}
+{% if  errors %}
+<div class="alert alert-danger" role="alert">
+    {% for field in errors %}
+        <b> Formularz </b>{{ form[field].label | capitalize }} <b> pokazuje błąd:</b>
+            {% for error in errors[field] %}
+                {{ error }} <br>
+            {% endfor %}
+    {% endfor %}
+</div>
+{% endif %}
+
+
+{% endmacro %}

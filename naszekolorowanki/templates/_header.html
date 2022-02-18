@@ -1,0 +1,51 @@
+<header class="main-header ">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+
+            <a class="navbar-brand" href="{{ url_for('main.home') }} "><img class="logo coloring-book"
+                                                                            src="{{ url_for('static', filename='img/logo.png')}}"
+                                                                            alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #345163" aria-current="page"
+                           href="{{ url_for('main.home') }} ">Strona główna</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " style="color: #345163" href="{{ url_for('image.add_image') }} ">Dodaj pracę
+                        </a>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link " style="color: #345163"
+                           href="{{ url_for('image.list_to_accept', username=current_user.username) }} ">Prace do
+                            akceptacji</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " style="color: #345163"
+                           href="{{ url_for('image.list_accepted', username=current_user.username) }} ">Prace
+                            zaakceptowane</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " style="color: #345163"
+                           href="{{ url_for('auth.user', username=current_user.username) }} ">Twoje konto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " style="color: #345163" href="{{ url_for('auth.logout') }} ">Wyloguj się</a>
+                    </li>
+
+                    {% endif %}
+
+                </ul>
+            </div>
+            <h1><i>Nasze kolorowanki</i></h1>
+
+    </nav>
+
+</header>
+

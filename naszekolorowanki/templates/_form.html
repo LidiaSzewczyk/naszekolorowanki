@@ -1,0 +1,13 @@
+{% from "_form_macros.html" import render_field  %}
+{% from "_form_macros.html" import error_messages  %}
+
+
+<form class="custom-form" action="{{ action }}" method="post" {% if enctype %} enctype="multipart/form-data" {% endif %}
+      novalidate>
+    {{ error_messages(form.errors, form) }}
+
+    {% for field in form %}
+        {{ render_field(field) }}
+        {% endfor %}
+
+</form>

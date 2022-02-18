@@ -1,0 +1,37 @@
+{% extends '_base.html' %}
+{% from "_form_macros.html" import render_field  %}
+
+{% block content %}
+<h3> Edycja - {{ title }}</h3>
+<div class="row">
+
+<div class="col-lg-6 col-md-6 mb-4">
+    <figure class="figure full-width">
+
+         <a  href="{{ url_for('image.download', filename=image.image, fn_name=fn_name)}}">
+        <img class="rounded img-fluid figure-img" alt="Responsive image"
+             src="{{ url_for('main.uploads', filename=image.image) }}"></a>
+        <figcaption class="figure-caption">
+            Nazwa pliku: {{ image.image}}<br>
+            Opis: {{image.description }}<br>
+            Autor: {{image.username}}<br>
+            Wielkość: {{ img_size }} MB <br>
+            Utworzone: {{ img_created  }} <br>
+            Opis admina: {{image.info}}<br>
+             <a class="btn btn-info float-left mb-3 pb-2" href="{{ url_for('image.download', filename=image.image, fn_name=fn_name)}}">Pobierz</a>
+        </figcaption>
+    </figure>
+</div>
+
+<div class="col-lg-6">
+    {% include '_form.html' %}
+
+
+    <br>
+    <a class="btn btn-danger float-right mb-3 pb-2" href="{{ url_for('image.delete_image', image_id=image.id, fn_name=fn_name)}}">Usuń
+                obrazek</a>
+</div></div>
+
+
+
+{% endblock %}
