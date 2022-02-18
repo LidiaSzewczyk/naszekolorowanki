@@ -8,7 +8,7 @@
 * deleting image
 * adding a new admin, changing the password, deleting the account.
 
-###Technology: 
+### Technology: 
 * Flask, Flask-WTF, Flask-SQLAlchemy, Flask-Login, Jinja2, Python, Bootstrap, 
 
 
