@@ -8,16 +8,15 @@ class Config(object):
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ALLOWED_IMAGE_EXTENSIONS = ["jpeg", "jpg", "png"]
-    USER_NAME = "naszadmin"
-    USER_PASSWORD = 'Naszehaslo1!'
-
+    USER_NAME = "admintomy"
+    USER_PASSWORD = 'Projekt10+40'
 
 
 class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(basedir, "naszekolorowanki", "app.db")}'
     IMAGE_UPLOADS = os.path.join(basedir, "naszekolorowanki", "uploaded_pictures")
     IMAGE_RESIZED = os.path.join(basedir, "naszekolorowanki", "uploaded_pictures", "images")
-    THUMBNAIL = os.path.join(basedir, "naszekolorowanki", "uploaded_pictures","thumbnails")
+    THUMBNAIL = os.path.join(basedir, "naszekolorowanki", "uploaded_pictures", "thumbnails")
 
 
 class TestingConfig(Config):
@@ -31,8 +30,9 @@ class ProductionConfig(Config):
         "FLASK_DB_URI") or f'sqlite:///{os.path.join(basedir, "naszekolorowanki", "app.db")}'
     IMAGE_UPLOADS = os.environ.get("FLASK_UPLOADS_FOLDER_URI") or os.path.join(basedir, "naszekolorowanki",
                                                                                "uploaded_pictures")
-    IMAGE_RESIZED = os.environ.get("FLASK_UPLOADS_FOLDER_URI") or os.path.join(basedir, "naszekolorowanki", "uploaded_pictures",
+    IMAGE_RESIZED = os.environ.get("FLASK_UPLOADS_FOLDER_URI") or os.path.join(basedir, "naszekolorowanki",
+                                                                               "uploaded_pictures",
                                                                                "images")
-    THUMBNAIL = os.environ.get("FLASK_UPLOADS_FOLDER_URI") or os.path.join(basedir, "naszekolorowanki", "uploaded_pictures",
-                                                                               "thumbnails")
-
+    THUMBNAIL = os.environ.get("FLASK_UPLOADS_FOLDER_URI") or os.path.join(basedir, "naszekolorowanki",
+                                                                           "uploaded_pictures",
+                                                                           "thumbnails")
